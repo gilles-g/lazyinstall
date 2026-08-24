@@ -20,7 +20,7 @@ use lazyinstall::ui::app::App;
         ", built ", env!("LI_BUILD_DATE"),
         ", ", env!("LI_OS"), "/", env!("LI_ARCH"), ")",
     ),
-    about = "TUI pour suivre des dossiers d'installation et lancer leurs mises à jour"
+    about = "A TUI to track folders holding update scripts and run them"
 )]
 struct Cli {}
 

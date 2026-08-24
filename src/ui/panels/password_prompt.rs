@@ -16,7 +16,7 @@ pub fn render(frame: &mut Frame, area: Rect, target: &str, prompt: Option<&str>,
     let masked: String = "•".repeat(input.chars().count());
     let lines = vec![
         Line::from(Span::styled(
-            prompt.unwrap_or("Mot de passe sudo :"),
+            prompt.unwrap_or("sudo password:"),
             Style::default().fg(Color::Gray),
         )),
         Line::from(vec![
@@ -26,7 +26,7 @@ pub fn render(frame: &mut Frame, area: Rect, target: &str, prompt: Option<&str>,
         ]),
     ];
 
-    let title = format!(" Mot de passe sudo — « {target} » — Enter pour valider, Esc pour annuler ");
+    let title = format!(" sudo password for {target} — Enter to confirm, Esc to cancel ");
     let block = Block::default()
         .title(title)
         .borders(Borders::ALL)

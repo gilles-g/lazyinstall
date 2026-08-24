@@ -85,19 +85,25 @@ impl InstallTarget {
     pub fn update(&self) -> Result<RunningUpdate> {
         let pty = portable_pty::native_pty_system()
             .openpty(PtySize::default())
-            .context("ouverture du pseudo-terminal")?;
+            .context("cannot open the pseudo-terminal")?;
 
         let mut command = CommandBuilder::new("bash");
         command.arg(&self.script);
         command.cwd(&self.folder);
         command.env("LC_ALL", "C");
 
-        let reader = pty.master.try_clone_reader().context("lecture du terminal")?;
-        let writer = pty.master.take_writer().context("écriture vers le terminal")?;
+        let reader = pty
+            .master
+            .try_clone_reader()
+            .context("cannot read from the terminal")?;
+        let writer = pty
+            .master
+            .take_writer()
+            .context("cannot write to the terminal")?;
         let mut child = pty
             .slave
             .spawn_command(command)
-            .with_context(|| format!("lancement de {}", self.script.display()))?;
+            .with_context(|| format!("cannot launch {}", self.script.display()))?;
         let killer = child.clone_killer();
         // On ferme notre extrémité « esclave » : le lecteur recevra ainsi l'EOF
         // quand le script aura terminé.
@@ -181,7 +187,10 @@ fn write_passwords(mut writer: Box<dyn Write + Send>, password_rx: Receiver<Stri
     while let Ok(password) = password_rx.recv() {
         let mut bytes = password.into_bytes();
         bytes.push(b'\n');
-        let ok = writer.write_all(&bytes).and_then(|_| writer.flush()).is_ok();
+        let ok = writer
+            .write_all(&bytes)
+            .and_then(|_| writer.flush())
+            .is_ok();
         bytes.iter_mut().for_each(|b| *b = 0);
         if !ok {
             break;
@@ -213,7 +222,9 @@ mod tests {
     fn it_recognizes_sudo_and_generic_password_prompts() {
         assert!(looks_like_password_prompt("[sudo] password for bob: "));
         assert!(looks_like_password_prompt("Password:"));
-        assert!(looks_like_password_prompt("première ligne\n[sudo] password for bob: "));
+        assert!(looks_like_password_prompt(
+            "première ligne\n[sudo] password for bob: "
+        ));
         assert!(looks_like_password_prompt("Mot de passe : "));
     }
 
@@ -221,7 +232,11 @@ mod tests {
     fn it_ignores_regular_output() {
         assert!(!looks_like_password_prompt("téléchargement... 50%"));
         assert!(!looks_like_password_prompt(""));
-        assert!(!looks_like_password_prompt("password mis à jour avec succès"));
-        assert!(!looks_like_password_prompt("Étapes restantes :\nclonage en cours"));
+        assert!(!looks_like_password_prompt(
+            "password mis à jour avec succès"
+        ));
+        assert!(!looks_like_password_prompt(
+            "Étapes restantes :\nclonage en cours"
+        ));
     }
 }

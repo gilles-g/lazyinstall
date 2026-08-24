@@ -40,9 +40,9 @@ pub fn render(frame: &mut Frame, area: Rect, targets: &[TrackedTarget], cursor: 
         .collect();
 
     let title = if targets.is_empty() {
-        " lazyinstall — aucun dossier suivi ([a] pour en ajouter) "
+        " lazyinstall — no folder tracked ([a] to add one) "
     } else {
-        " lazyinstall — dossiers suivis "
+        " lazyinstall — tracked folders "
     };
 
     let block = Block::default()

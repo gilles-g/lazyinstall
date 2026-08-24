@@ -25,7 +25,7 @@ pub fn render(frame: &mut Frame, area: Rect) {
         .collect();
 
     let block = Block::default()
-        .title(" Aide — Esc pour fermer ")
+        .title(" Help — Esc to close ")
         .borders(Borders::ALL)
         .border_style(Style::default().fg(Color::Cyan));
 

@@ -19,14 +19,14 @@ use crate::install::target::InstallTarget;
 /// à défaut de tout `update-*.sh`, une unique cible sur le premier `*.sh`.
 pub fn discover(folder: &Path) -> Result<Vec<InstallTarget>> {
     if !folder.is_dir() {
-        bail!("{} n'est pas un dossier", folder.display());
+        bail!("{} is not a directory", folder.display());
     }
     let folder = fs::canonicalize(folder)
-        .map_err(|e| anyhow!("résolution de {} : {e}", folder.display()))?;
+        .map_err(|e| anyhow!("cannot resolve {}: {e}", folder.display()))?;
 
     let scripts = find_scripts(&folder);
     if scripts.is_empty() {
-        bail!("aucun script *.sh trouvé dans {}", folder.display());
+        bail!("no *.sh script found in {}", folder.display());
     }
 
     Ok(scripts

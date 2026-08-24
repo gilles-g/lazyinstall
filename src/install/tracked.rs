@@ -23,10 +23,10 @@ pub enum UpdateState {
 impl UpdateState {
     pub fn label(&self) -> &str {
         match self {
-            UpdateState::Idle => "au repos",
-            UpdateState::Updating => "mise à jour…",
-            UpdateState::Succeeded => "à jour",
-            UpdateState::Failed(_) => "ÉCHEC",
+            UpdateState::Idle => "idle",
+            UpdateState::Updating => "updating…",
+            UpdateState::Succeeded => "up to date",
+            UpdateState::Failed(_) => "FAILED",
         }
     }
 }
@@ -152,7 +152,7 @@ impl TrackedTarget {
         match finished {
             Some(true) => self.state = UpdateState::Succeeded,
             Some(false) => {
-                self.state = UpdateState::Failed("script terminé en erreur".to_string());
+                self.state = UpdateState::Failed("script exited with an error".to_string());
             }
             // Pas encore fini : on remet la poignée en place pour le prochain tour.
             None => self.running = Some(running),

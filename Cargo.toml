@@ -4,6 +4,9 @@ version = "0.1.0"
 edition = "2021"
 description = "A TUI to track folders holding update scripts and run them, inspired by lazygit"
 license = "MIT"
+repository = "https://github.com/gilles-g/lazyinstall"
+homepage = "https://github.com/gilles-g/lazyinstall"
+readme = "README.md"
 keywords = ["install", "update", "tui", "terminal", "productivity"]
 categories = ["command-line-utilities"]
 

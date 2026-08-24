@@ -8,7 +8,7 @@ pub fn render(frame: &mut Frame, area: Rect, toast: Option<&str>) {
         (format!(" {}", msg), Color::Yellow)
     } else {
         (
-            " [Enter/u] màj  [U] tout  [a] ajouter  [d] retirer  [j/k] naviguer  [q] quitter  [?] aide"
+            " [Enter/u] update  [U] all  [a] add  [d] remove  [j/k] move  [q] quit  [?] help"
                 .to_string(),
             Color::White,
         )

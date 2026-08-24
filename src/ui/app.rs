@@ -73,7 +73,7 @@ impl App {
         if broken > 0 {
             // On réécrit la config sans les dossiers cassés.
             let _ = self.persist();
-            self.set_toast(format!("{broken} dossier(s) introuvable(s) retiré(s)"));
+            self.set_toast(format!("{broken} missing folder(s) dropped"));
         }
     }
 
@@ -162,7 +162,7 @@ impl App {
                     if let Some(tracked) = self.targets.get_mut(entry.target) {
                         tracked.cancel();
                     }
-                    self.set_toast("saisie du mot de passe annulée".to_string());
+                    self.set_toast("password prompt cancelled".to_string());
                 }
             }
             KeyCode::Enter => {
@@ -225,12 +225,12 @@ impl App {
             return;
         };
         if tracked.is_updating() {
-            self.set_toast("mise à jour déjà en cours".to_string());
+            self.set_toast("update already running".to_string());
             return;
         }
         if let Err(e) = tracked.launch() {
             let name = tracked.name().to_string();
-            self.set_toast(format!("échec du lancement de {name} : {e}"));
+            self.set_toast(format!("cannot launch {name}: {e}"));
         }
     }
 
@@ -241,7 +241,7 @@ impl App {
                 launched += 1;
             }
         }
-        self.set_toast(format!("{launched} mise(s) à jour lancée(s)"));
+        self.set_toast(format!("{launched} update(s) launched"));
     }
 
     fn remove_selected(&mut self) {
@@ -253,7 +253,7 @@ impl App {
             self.cursor = self.targets.len().saturating_sub(1);
         }
         let _ = self.persist();
-        self.set_toast(format!("« {} » retiré du suivi", removed.name()));
+        self.set_toast(format!("{} no longer tracked", removed.name()));
     }
 
     fn handle_add_key(&mut self, key: KeyEvent) {
@@ -288,7 +288,7 @@ impl App {
         let folder = expand_tilde(raw);
         match discover::discover(&folder) {
             Ok(targets) => self.track_new(targets),
-            Err(e) => self.set_toast(format!("ajout impossible : {e}")),
+            Err(e) => self.set_toast(format!("cannot add: {e}")),
         }
     }
 
@@ -310,14 +310,14 @@ impl App {
             added += 1;
         }
         if added == 0 {
-            self.set_toast("déjà suivi".to_string());
+            self.set_toast("already tracked".to_string());
             return;
         }
         self.cursor = self.targets.len() - 1;
         let _ = self.persist();
         match added {
-            1 => self.set_toast(format!("« {last_name} » ajouté au suivi")),
-            n => self.set_toast(format!("{n} cibles ajoutées au suivi")),
+            1 => self.set_toast(format!("{last_name} now tracked")),
+            n => self.set_toast(format!("{n} targets now tracked")),
         }
     }
 

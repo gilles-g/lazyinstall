@@ -14,7 +14,7 @@ pub fn render(frame: &mut Frame, area: Rect, input: &str) {
 
     let lines = vec![
         Line::from(Span::styled(
-            "Chemin du dossier à suivre :",
+            "Path of the folder to track:",
             Style::default().fg(Color::Gray),
         )),
         Line::from(vec![
@@ -25,7 +25,7 @@ pub fn render(frame: &mut Frame, area: Rect, input: &str) {
     ];
 
     let block = Block::default()
-        .title(" Ajouter un dossier — Enter pour valider, Esc pour annuler ")
+        .title(" Add a folder — Enter to confirm, Esc to cancel ")
         .borders(Borders::ALL)
         .border_style(Style::default().fg(Color::Cyan));
 

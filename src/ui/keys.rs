@@ -42,38 +42,38 @@ pub struct Binding {
 pub const HELP: &[Binding] = &[
     Binding {
         keys: "j/k, ↓/↑",
-        desc: "naviguer dans la liste",
+        desc: "move through the list",
     },
     Binding {
         keys: "Enter / u",
-        desc: "mettre à jour le dossier sélectionné",
+        desc: "update the selected folder",
     },
     Binding {
         keys: "U",
-        desc: "tout mettre à jour",
+        desc: "update everything",
     },
     Binding {
         keys: "a",
-        desc: "ajouter un dossier à suivre",
+        desc: "add a folder to track",
     },
     Binding {
         keys: "d",
-        desc: "retirer le dossier sélectionné",
+        desc: "stop tracking the selected folder",
     },
     Binding {
-        keys: "(popup sudo)",
-        desc: "si un script demande sudo : saisir le mot de passe, Enter valide",
+        keys: "(sudo popup)",
+        desc: "if a script asks for sudo: type the password, Enter confirms",
     },
     Binding {
         keys: "q / Ctrl-C",
-        desc: "quitter",
+        desc: "quit",
     },
     Binding {
         keys: "?",
-        desc: "basculer l'aide",
+        desc: "toggle help",
     },
     Binding {
         keys: "Esc",
-        desc: "fermer l'aide / annuler l'ajout",
+        desc: "close help / cancel the add",
     },
 ];

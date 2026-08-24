@@ -34,9 +34,10 @@ pub fn load() -> Vec<PathBuf> {
 /// le même dossier, on déduplique ici (en conservant l'ordre) : on stocke un
 /// ensemble de dossiers, pas une cible par ligne.
 pub fn save(folders: &[PathBuf]) -> Result<()> {
-    let path = config_path().context("dossier de configuration introuvable")?;
+    let path = config_path().context("config directory not found")?;
     if let Some(parent) = path.parent() {
-        fs::create_dir_all(parent).with_context(|| format!("création de {}", parent.display()))?;
+        fs::create_dir_all(parent)
+            .with_context(|| format!("cannot create {}", parent.display()))?;
     }
     let mut seen = HashSet::new();
     let data = StoreData {
@@ -47,6 +48,6 @@ pub fn save(folders: &[PathBuf]) -> Result<()> {
             .collect(),
     };
     let json = serde_json::to_string_pretty(&data)?;
-    fs::write(&path, json).with_context(|| format!("écriture de {}", path.display()))?;
+    fs::write(&path, json).with_context(|| format!("cannot write {}", path.display()))?;
     Ok(())
 }

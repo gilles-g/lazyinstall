@@ -9,8 +9,8 @@ use crate::install::tracked::TrackedTarget;
 /// Affiche la sortie de la mise à jour de la cible sélectionnée.
 pub fn render(frame: &mut Frame, area: Rect, selected: Option<&TrackedTarget>) {
     let title = match selected {
-        Some(tracked) => format!(" Sortie : {} ", tracked.name()),
-        None => " Sortie ".to_string(),
+        Some(tracked) => format!(" Output: {} ", tracked.name()),
+        None => " Output ".to_string(),
     };
 
     let inner_height = area.height.saturating_sub(2) as usize;
@@ -31,10 +31,8 @@ pub fn render(frame: &mut Frame, area: Rect, selected: Option<&TrackedTarget>) {
                 })
                 .collect()
         }
-        Some(_) => vec![placeholder(
-            "  Aucune sortie — [Enter/u] pour lancer la mise à jour",
-        )],
-        None => vec![placeholder("  Aucun dossier suivi")],
+        Some(_) => vec![placeholder("  No output yet — [Enter/u] to run the update")],
+        None => vec![placeholder("  No folder tracked")],
     };
 
     let block = Block::default()
