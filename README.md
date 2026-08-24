@@ -12,20 +12,20 @@ prompt is detected, asked for once in a masked popup, then reused for the rest o
 ## Preview
 
 ```
-┌ lazyinstall — dossiers suivis ───────────────────────────────────────────┐
-│ ● lazygit           à jour    /home/user/lazygitinstall                  │
-│ ○ composer          au repos  /home/user/lazycomposerinstall             │
-│ ✗ neovim            ÉCHEC     /home/user/nvim-install                    │
+┌ lazyinstall — tracked folders ───────────────────────────────────────────┐
+│ ● lazygit           up to date  /home/user/lazygitinstall                │
+│ ○ composer          idle        /home/user/lazycomposerinstall           │
+│ ✗ neovim            FAILED      /home/user/nvim-install                  │
 └──────────────────────────────────────────────────────────────────────────┘
-┌ Sortie : lazygit ────────────────────────────────────────────────────────┐
-│  Version installée : 0.62.1                                              │
-│  Dernière release  : 0.62.2                                              │
-│  lazygit mis à jour : 0.62.1 -> 0.62.2                                   │
+┌ Output: lazygit ─────────────────────────────────────────────────────────┐
+│  Installed version : 0.62.1                                              │
+│  Latest release    : 0.62.2                                              │
+│  lazygit updated    : 0.62.1 -> 0.62.2                                   │
 └──────────────────────────────────────────────────────────────────────────┘
- [Enter/u] màj  [U] tout  [a] ajouter  [d] retirer  [j/k] naviguer  [q] quitter  [?] aide
+ [Enter/u] update  [U] all  [a] add  [d] remove  [j/k] move  [q] quit  [?] help
 ```
 
-The TUI itself speaks French. Status markers: `○` idle · `◌` updating · `●` up to date · `✗` failed.
+Status markers: `○` idle · `◌` updating · `●` up to date · `✗` failed.
 
 ## Install in 2 steps
 
