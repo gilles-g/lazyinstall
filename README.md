@@ -11,8 +11,8 @@ et affiche la sortie en direct.
 
 ```
 ┌ lazyinstall — dossiers suivis ──────────────────────────────────────────┐
-│ ● lazygit          à jour      /home/spiriit/lazygitinstall              │
-│ ○ composer         au repos    /home/spiriit/lazycomposerinstall         │
+│ ● lazygit          à jour      /home/user/lazygitinstall              │
+│ ○ composer         au repos    /home/user/lazycomposerinstall         │
 └──────────────────────────────────────────────────────────────────────────┘
 ┌ Sortie : lazygit ─────────────────────────────────────────────────────────┐
 │   Version installée : 0.62.1                                              │
